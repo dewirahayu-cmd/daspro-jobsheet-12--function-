@@ -1,6 +1,7 @@
+import java.util.Scanner;
 public class kafe08 {
 
-public static void Menu(String namaPelanggan, boolean isMember, String kodePromo) {
+    public static void Menu(String namaPelanggan, boolean isMember, String kodePromo) {
         System.out.println("===== MENU KAFE =====");
         System.out.println("Pelanggan: " + namaPelanggan);
         
@@ -27,8 +28,28 @@ public static void Menu(String namaPelanggan, boolean isMember, String kodePromo
         }
     }
     
+    public static int hitungTotalHargaNoAbsen(int pilihanMenu, int banyakItem) {
+        int[] hargaMenu = {15000, 20000, 22000, 12000, 18000};
+        int hargaSatuan = hargaMenu[pilihanMenu - 1];
+        int totalHarga = hargaSatuan * banyakItem;
+        return totalHarga;
+    }
+    
     public static void main(String[] args) {
-        Menu("Dewi", true , "DISKON30");
+        Scanner sc = new Scanner(System.in);
+        
+        Menu("Pelanggan", false, "");
+        
+        System.out.print("\nMasukkan nomor menu yang ingin Anda pesan: ");
+        int pilihanMenu = sc.nextInt();
+        
+        System.out.print("Masukkan jumlah item yang ingin dipesan: ");
+        int banyakItem = sc.nextInt();
+        
+        int totalBayar = hitungTotalHargaNoAbsen(pilihanMenu, banyakItem);
+        
+        System.out.println("\nTotal yang harus dibayar: Rp " + totalBayar);
+        
+        sc.close();
     }
 }
-
