@@ -1,27 +1,32 @@
 import java.util.Scanner;
 
 public class hitungBalok08 {
+    public static int hitungLuas(int panjang, int lebar) {
+        int luas = panjang * lebar;
+        return luas;
+    }
+    public static int hitungVolume(int panjang, int lebar, int tinggi) {
+        int volume = panjang * lebar * tinggi;
+        return volume;
+    }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int p, l, t, L, volume;
         
         System.out.print("Masukkan panjang: ");
-        p = sc.nextInt();
+        int p = sc.nextInt();
         
         System.out.print("Masukkan lebar: ");
-        l = sc.nextInt();
+        int l = sc.nextInt();
         
         System.out.print("Masukkan tinggi: ");
-        t = sc.nextInt();
+        int t = sc.nextInt();
         
-        L = p * l;
+        int luasPersegi = hitungLuas(p, l);
+        int volumeBalok = hitungVolume(p, l, t);
         
-        volume = p * l * t;
-
-        System.out.println("Luas persegi panjang adalah: " + L);
-        System.out.println("Volume balok adalah: " + volume);
+        System.out.println("Luas persegi panjang: " + luasPersegi);
+        System.out.println("Volume balok: " + volumeBalok);
         
         sc.close();
     }
 }
-
