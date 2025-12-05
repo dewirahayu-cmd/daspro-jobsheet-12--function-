@@ -13,30 +13,30 @@ public class rekapPenjualanCafe08 {
         }
     }
     
+    public static void inputNamaMenu(String[] namaMenu, Scanner sc) {
+        System.out.println("\n===== INPUT NAMA MENU =====");
+        sc.nextLine();
+        for (int i = 0; i < namaMenu.length; i++) {
+            System.out.print("Masukkan nama menu ke-" + (i + 1) + ": ");
+            namaMenu[i] = sc.nextLine();
+        }
+    }
+    
     public static void tampilkanDataPenjualan(int[][] penjualan, String[] namaMenu) {
         System.out.println("\n===== REKAP PENJUALAN KAFE =====");
-        System.out.print("Menu\t\t");
-        for (int j = 0; j < penjualan[0].length; j++) {
-            System.out.print("Hari " + (j + 1) + "\t");
-        }
-        System.out.println();
-        System.out.println("=".repeat(80));
         
         for (int i = 0; i < penjualan.length; i++) {
-            System.out.print(namaMenu[i] + "\t");
-            if (namaMenu[i].length() < 8) System.out.print("\t");
-            
+            System.out.println("\n" + namaMenu[i] + ":");
             for (int j = 0; j < penjualan[i].length; j++) {
-                System.out.print(penjualan[i][j] + "\t");
+                System.out.println("  Hari ke-" + (j + 1) + ": " + penjualan[i][j] + " porsi");
             }
-            System.out.println();
         }
-        System.out.println("=".repeat(80));
+        System.out.println("\n" + "=".repeat(50));
     }
-   
+    
     public static void tampilkanPenjualanTertinggi(int[][] penjualan, String[] namaMenu) {
         int[] totalPerMenu = new int[penjualan.length];
-              
+        
         for (int i = 0; i < penjualan.length; i++) {
             int total = 0;
             for (int j = 0; j < penjualan[i].length; j++) {
@@ -57,8 +57,9 @@ public class rekapPenjualanCafe08 {
         System.out.println("\n===== MENU PENJUALAN TERTINGGI =====");
         System.out.println("Menu: " + namaMenu[indexTertinggi]);
         System.out.println("Total penjualan: " + nilaiTertinggi + " porsi");
-        System.out.println("====================================");
+        System.out.println("=".repeat(50));
     }
+    
     public static void tampilkanRataRataPenjualan(int[][] penjualan, String[] namaMenu) {
         System.out.println("\n===== RATA-RATA PENJUALAN PER MENU =====");
         
@@ -70,31 +71,36 @@ public class rekapPenjualanCafe08 {
             double rataRata = (double) total / penjualan[i].length;
             System.out.println(namaMenu[i] + ": " + rataRata + " porsi/hari");
         }
-        System.out.println("========================================");
+        System.out.println("=".repeat(50));
     }
     
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         
-        
-        String[] namaMenu = {"Kopi", "Teh", "Es Degan", "Roti Bakar", "Gorengan"};
-        
-        // Array 2 dimensi: [jumlah menu][jumlah hari]
-        // 5 menu, 7 hari
-        int[][] dataPenjualan = new int[5][7];
-        
         System.out.println("===== SISTEM REKAP PENJUALAN KAFE IBU MARIANA =====");
+       
+        System.out.print("Masukkan jumlah menu: ");
+        int jumlahMenu = sc.nextInt();
+        System.out.print("Masukkan jumlah hari: ");
+        int jumlahHari = sc.nextInt();
         
-        // Memanggil fungsi input data penjualan
+       
+        String[] namaMenu = new String[jumlahMenu];
+        int[][] dataPenjualan = new int[jumlahMenu][jumlahHari];
+        
+        // Input nama menu
+        inputNamaMenu(namaMenu, sc);
+        
+        // Input data penjualan
         inputDataPenjualan(dataPenjualan, namaMenu, sc);
         
-        // Memanggil fungsi tampilkan seluruh data penjualan
+        // Tampilkan seluruh data penjualan
         tampilkanDataPenjualan(dataPenjualan, namaMenu);
         
-        // Memanggil fungsi tampilkan menu dengan penjualan tertinggi
+        // Tampilkan menu dengan penjualan tertinggi
         tampilkanPenjualanTertinggi(dataPenjualan, namaMenu);
         
-        // Memanggil fungsi tampilkan rata-rata penjualan
+        // Tampilkan rata-rata penjualan
         tampilkanRataRataPenjualan(dataPenjualan, namaMenu);
         
         sc.close();
