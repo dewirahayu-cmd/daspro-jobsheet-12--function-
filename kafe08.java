@@ -66,7 +66,7 @@ public class kafe08 {
         System.out.print("Apakah pelanggan member? (true/false): ");
         boolean isMember = sc.nextBoolean();
         
-        sc.nextLine(); // consume newline
+        sc.nextLine(); 
         System.out.print("Masukkan kode promo (kosongkan jika tidak ada): ");
         String kodePromo = sc.nextLine();
         
