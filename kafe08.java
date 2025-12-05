@@ -1,6 +1,6 @@
 import java.util.Scanner;
 public class kafe08 {
-
+    
     public static void Menu(String namaPelanggan, boolean isMember, String kodePromo) {
         System.out.println("===== MENU KAFE =====");
         System.out.println("Pelanggan: " + namaPelanggan);
@@ -23,22 +23,47 @@ public class kafe08 {
             System.out.println("Kode Promo Valid! Anda mendapat diskon 50%");
         } else if (kodePromo.equals("DISKON30")) {
             System.out.println("Kode Promo Valid! Anda mendapat diskon 30%");
-        } else {
+        } else if (!kodePromo.isEmpty()) {
             System.out.println("Kode Promo Invalid! Tidak ada diskon tambahan");
         }
     }
     
-    public static int hitungTotalHargaNoAbsen(int pilihanMenu, int banyakItem) {
+    public static int hitungTotalHargaNoAbsen(int pilihanMenu, int banyakItem, String kodePromo) {
         int[] hargaMenu = {15000, 20000, 22000, 12000, 18000};
         int hargaSatuan = hargaMenu[pilihanMenu - 1];
         int totalHarga = hargaSatuan * banyakItem;
+        
+        System.out.println("\nTotal harga sebelum diskon: Rp " + totalHarga);
+        
+        if (kodePromo.equals("DISKON50")) {
+            int diskon = totalHarga * 50 / 100;
+            System.out.println("Diskon 50%: Rp " + diskon);
+            totalHarga = totalHarga - diskon;
+        } else if (kodePromo.equals("DISKON30")) {
+            int diskon = totalHarga * 30 / 100;
+            System.out.println("Diskon 30%: Rp " + diskon);
+            totalHarga = totalHarga - diskon;
+        } else if (!kodePromo.isEmpty()) {
+            System.out.println("Kode promo invalid! Tidak ada pengurangan harga");
+        }
+        
         return totalHarga;
     }
     
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         
-        Menu("Pelanggan", false, "");
+        System.out.print("Masukkan nama pelanggan: ");
+        String namaPelanggan = sc.nextLine();
+        
+        System.out.print("Apakah pelanggan member? (true/false): ");
+        boolean isMember = sc.nextBoolean();
+        
+        sc.nextLine(); // consume newline
+        System.out.print("Masukkan kode promo (kosongkan jika tidak ada): ");
+        String kodePromo = sc.nextLine();
+        
+        Menu(namaPelanggan, isMember, kodePromo);
         
         System.out.print("\nMasukkan nomor menu yang ingin Anda pesan: ");
         int pilihanMenu = sc.nextInt();
@@ -46,10 +71,11 @@ public class kafe08 {
         System.out.print("Masukkan jumlah item yang ingin dipesan: ");
         int banyakItem = sc.nextInt();
         
-        int totalBayar = hitungTotalHargaNoAbsen(pilihanMenu, banyakItem);
+        int totalBayar = hitungTotalHargaNoAbsen(pilihanMenu, banyakItem, kodePromo);
         
         System.out.println("\nTotal yang harus dibayar: Rp " + totalBayar);
-        
+       
         sc.close();
     }
 }
+    
